@@ -1,5 +1,5 @@
 @include('components.header')
-<form method="POST" action="{{ route('login') }}">
+{{-- <form method="POST" action="{{ route('login') }}">
     @csrf
 
     <div>
@@ -13,12 +13,26 @@
     </div>
 
     <button type="submit">Login</button>
-</form>
+</form> --}}
 
-{!! Form::open(['route'=> 'login', 'method'-> 'post']) !!}
-<p>Email</p>
-{!! Form::Email('email') !!}
-<p>Password</p>
-{!! Form::Password('password') !!}
+    @if ($errors->any())
+    <div style="color: red">
+        @foreach ($errors->all() as $error)
+            <p>{{ $error }}</p>
+        @endforeach
+    </div>
+    @endif
+    <form method="POST" action="{{ route('login') }}">
+        @csrf
+
+        <p>Email </p>
+        <input type="email" name="email" required>
+        <p>Password</p>
+        <input type="password" name="password" required>
+
+
+        <input type="submit">
+    </form>
+
 
 @include('components.footer')
