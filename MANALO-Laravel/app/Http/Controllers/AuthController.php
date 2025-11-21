@@ -48,7 +48,7 @@ class AuthController extends Controller
     public function logout(){
         auth()->logout();
         session()->invalidate();
-        session()->invalidateToken();
+        session()->regenerateToken();
         return redirect()->route('login.form')->with('success', 'Logout Successful');
     }
 }

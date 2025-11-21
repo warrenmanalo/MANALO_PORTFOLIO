@@ -1,5 +1,5 @@
 @include('components.header')
-{{-- <form method="POST" action="{{ route('login') }}">
+<!-- <form method="POST" action="{{ route('login') }}">
     @csrf
 
     <div>
@@ -13,7 +13,7 @@
     </div>
 
     <button type="submit">Login</button>
-</form> --}}
+</form> -->
 
     @if ($errors->any())
     <div style="color: red">
