@@ -4,7 +4,7 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', function () {
+Route::get('/portfolio', function () {
     return view('portfolio');
 });
 
@@ -21,4 +21,7 @@ Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::get('dashboard', function() {
     return view('dashboard');
 })->middleware('auth')->name('dashboard');
+
+Route::post('/logout', [AuthController::class, 'logout']);
+
 

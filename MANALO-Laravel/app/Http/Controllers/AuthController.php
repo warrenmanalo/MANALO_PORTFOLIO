@@ -44,4 +44,11 @@ class AuthController extends Controller
             'email'     => 'Invalid email/password!'
         ]);
     }
+
+    public function logout(){
+        auth()->logout();
+        session()->invalidate();
+        session()->invalidateToken();
+        return redirect()->route('login.form')->with('success', 'Logout Successful');
+    }
 }
