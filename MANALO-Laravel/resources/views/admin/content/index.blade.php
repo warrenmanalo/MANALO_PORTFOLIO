@@ -13,6 +13,7 @@
         <input type="text" name="heading" value="{{ $heroes->heading }}" class="w-full mb-3 p-2 rounded text-black">
         <input type="text" name="highlight" value="{{ $heroes->highlight }}" class="w-full mb-3 p-2 rounded text-black">
         <input type="text" name="subheading" value="{{ $heroes->subheading }}" class="w-full mb-3 p-2 rounded text-black">
+        <input type="file" name="profile_photo" value="{{ $heroes->profile_photo }}"class="w-full mt-1 text-gray-300">
 
         <button class="bg-blue-600 px-4 py-2 rounded text-white">Update Hero</button>
     </form>
@@ -38,7 +39,7 @@
         @csrf
         @method('PUT')
 
-        <input type="text" name="facebook" value="{{ $contact->facebook_url }}" class="w-full mb-3 p-2 rounded text-black">
+        <input type="text" name="facebook" value="{{ $contact->facebook_url ?? }}" class="w-full mb-3 p-2 rounded text-black">
         <input type="text" name="email" value="{{ $contact->email }}" class="w-full mb-3 p-2 rounded text-black">
         <input type="text" name="github" value="{{ $contact->github_url }}" class="w-full mb-3 p-2 rounded text-black">
 

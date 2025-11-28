@@ -1,35 +1,60 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="p-8">
+<div class="p-10 min-h-screen bg-darkbg text-white">
 
-    <div class="flex justify-between mb-8">
-        <h1 class="text-3xl font-semibold">Projects</h1>
+    {{-- HEADER --}}
+    <div class="flex justify-between items-center mb-12">
+        <h1 class="text-4xl font-bold tracking-tight">Projects</h1>
+
         <a href="{{ route('admin.projects.create') }}"
-            class="px-6 py-2 bg-primary text-white rounded-lg">+ Add Project</a>
+           class="px-6 py-2 bg-primary text-white rounded-xl shadow-lg hover:scale-105 hover:bg-blue-500 transition transform duration-200">
+            + Add Project
+        </a>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {{-- PROJECT GRID --}}
+    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
 
         @foreach ($projects as $project)
-        <div class="bg-gray-900 border border-gray-700 rounded-xl p-4">
+        <div class="group bg-card border border-gray-800 rounded-2xl p-5 shadow-lg 
+                    hover:shadow-2xl hover:border-primary transition duration-300">
 
+            {{-- IMAGE --}}
             @if($project->image)
-                <img src="{{ asset('storage/'.$project->image) }}" class="rounded-lg mb-4">
+                <div class="relative overflow-hidden rounded-xl mb-5">
+                    <img src="{{ asset('storage/'.$project->image) }}"
+                         class="w-full h-48 object-cover rounded-xl transform group-hover:scale-105 transition duration-500">
+                </div>
             @endif
 
-            <h2 class="text-xl font-semibold">{{ $project->title }}</h2>
-            <p class="text-primary">{{ $project->category }}</p>
+            {{-- TITLE --}}
+            <h2 class="text-xl font-semibold mb-1">{{ $project->title }}</h2>
 
-            <div class="mt-4 flex gap-2">
+            {{-- CATEGORY TAG --}}
+            <span class="inline-block mb-4 px-3 py-1 text-xs font-semibold rounded-full bg-primary/20 text-primary border border-primary/30">
+                {{ $project->category }}
+            </span>
+
+            {{-- BUTTONS --}}
+            <div class="mt-4 flex gap-3">
+
                 <a href="{{ route('admin.projects.edit', $project->id) }}"
-                    class="px-4 py-2 bg-blue-600 text-white rounded">Edit</a>
+                    class="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-500 hover:scale-[1.02] transition duration-200">
+                    Edit
+                </a>
 
-                <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST">
+                <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST"
+                      onsubmit="return confirm('Are you sure you want to delete this project?')">
                     @csrf
                     @method('DELETE')
-                    <button class="px-4 py-2 bg-red-600 text-white rounded">Delete</button>
+
+                    <button
+                        class="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-500 hover:scale-[1.02] transition duration-200">
+                        Delete
+                    </button>
                 </form>
+
             </div>
 
         </div>

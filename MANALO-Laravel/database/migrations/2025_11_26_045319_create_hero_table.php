@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('heading');
             $table->string('highlight');
             $table->string('subheading');
+            $table->string('profile_photo')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('here');
+        Schema::dropIfExists('heroes');
     }
 };

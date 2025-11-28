@@ -36,18 +36,49 @@
     </nav>
     
 
-    <!-- HERO SECTION -->
-    <section id="hero" class="min-h-screen flex flex-col justify-center px-8 pt-40 max-w-7xl mx-auto">
-        <h1 id="hero-title" class="text-5xl font-bold opacity-0 animate-[fadeUp_1s_forwards]">
-            <span>
-                {{ $heroes->heading ?? '' }} 
-                <span class="text-primary">{{ $heroes->highlight }}</span>
-            </span>
-        </h1>
-        <p class="mt-3 text-xl opacity-0 animate-[fadeUp_1s_0.3s_forwards]">
-             {{ $heroes->subheading ?? ''}}
-        </p>
-        <div class="w-32 h-1 bg-primary shadow-[0_0_15px_#1E90FF] mt-5 opacity-0 animate-[fadeUp_1s_0.6s_forwards]"></div>
+    <section id="hero" class="min-h-screen flex flex-col md:flex-row items-center justify-center px-8 pt-40 max-w-7xl mx-auto gap-10">
+
+        <!-- TEXT -->
+        <div class="flex-1">
+            <h1 id="hero-title" class="text-5xl font-bold opacity-0 animate-[fadeUp_1s_forwards]">
+                <span>
+                    {{ $heroes->heading ?? 'Hi I\'m' }} 
+                    <span class="text-primary">{{ $heroes->highlight ?? "Warren"}} </span>
+                </span>
+            </h1>
+
+            <p class="mt-3 text-xl opacity-0 animate-[fadeUp_1s_0.3s_forwards]">
+                {{ $heroes->subheading ?? 'Aspiring Developer • CS Student • Tech Enthusiast'}}
+            </p>
+
+            <div class="w-32 h-1 bg-primary shadow-[0_0_15px_#1E90FF] mt-5 opacity-0 animate-[fadeUp_1s_0.6s_forwards]"></div>
+        </div>
+
+        <!-- RIGHT IMAGE -->
+        <div class="flex-1 flex justify-center md:justify-end opacity-0 animate-[fadeUp_1s_0.9s_forwards]">
+            <div class="relative group">
+
+                <!-- Glow that hugs the body -->
+                <div class="absolute inset-0 rounded-2xl 
+                            bg-primary/40 blur-[70px] opacity-70
+                            group-hover:blur-[90px] group-hover:opacity-90
+                            transition duration-500">
+                </div>
+
+                <!-- Actual Photo -->
+                @if ($heroes && $heroes->profile_photo)
+                    <img src="{{ asset('storage/' . $heroes->profile_photo) }}"
+                        class="relative w-[28rem] h-[28rem] object-contain 
+                            transition duration-500 group-hover:scale-105">
+                @else
+                    <!-- Default placeholder photo -->
+                    <img src="{{ asset('storage/my_photo.png') }}"
+                        class="relative w-[28rem] h-[28rem] object-contain 
+                            transition duration-500 group-hover:scale-105">
+                @endif
+            </div>
+        </div>
+
     </section>
 
     <style>
@@ -210,7 +241,12 @@
         <div class="flex justify-center gap-6 mt-6">
 
             @if($contact && $contact->facebook_url)
-                <a href="{{ $contact->facebook_url }}" target="_blank"
+                <a href="{{ $contact->facebook_url ?? 'https://www.facebook.com/warren.d.manalo' }}" target="_blank"
+                class="px-6 py-2 border border-primary rounded-lg hover:bg-primary hover:text-darkbg hover:shadow-[0_0_10px_#1E90FF] transition">
+                    Facebook
+                </a>
+            @else
+                <a href="https://www.facebook.com/warren.d.manalo" target="_blank"
                 class="px-6 py-2 border border-primary rounded-lg hover:bg-primary hover:text-darkbg hover:shadow-[0_0_10px_#1E90FF] transition">
                     Facebook
                 </a>
@@ -221,10 +257,20 @@
                 class="px-6 py-2 border border-primary rounded-lg hover:bg-primary hover:text-darkbg hover:shadow-[0_0_10px_#1E90FF] transition">
                     Email
                 </a>
+            @else
+                <a href="mailto: warrenmanalo44@gmail.com"
+                    class="px-6 py-2 border border-primary rounded-lg hover:bg-primary hover:text-darkbg hover:shadow-[0_0_10px_#1E90FF] transition">
+                        Email
+                    </a>
             @endif
 
             @if($contact && $contact->github_url)
-                <a href="{{ $contact->github_url }}" target="_blank"
+                <a href="{{ $contact->github_url ?? 'https://github.com/warrenmanalo'}}" target="_blank"
+                class="px-6 py-2 border border-primary rounded-lg hover:bg-primary hover:text-darkbg hover:shadow-[0_0_10px_#1E90FF] transition">
+                    GitHub
+                </a>
+            @else
+                <a href="https://github.com/warrenmanalo" target="_blank"
                 class="px-6 py-2 border border-primary rounded-lg hover:bg-primary hover:text-darkbg hover:shadow-[0_0_10px_#1E90FF] transition">
                     GitHub
                 </a>

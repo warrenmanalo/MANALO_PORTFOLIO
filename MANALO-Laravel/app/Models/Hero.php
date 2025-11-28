@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Hero extends Model
 {
     
-    protected $fillable = ['heading', 'highlight', 'subheading'];
+    protected $fillable = ['heading', 'highlight', 'subheading', 'profile_photo'];
 }

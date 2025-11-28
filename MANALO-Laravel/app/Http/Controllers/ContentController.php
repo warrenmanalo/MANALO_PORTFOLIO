@@ -20,23 +20,28 @@ class ContentController extends Controller
 
     public function updateHero(Request $request)
     {
-        $data = $request->validate([
-            'heading' => 'required|string',
-            'highlight' => 'required|string',
-            'subheading' => 'required|string',
+        $validated = $request->validate([
+            'heading' => 'required',
+            'subheading' => 'required',
+            'highlight' => 'required',
+            'profile_photo' => 'nullable|image',
         ]);
 
-        $hero = Hero::first();
+        $hero = Hero::first() ?? new Hero();
 
-        if ($hero) {
-            $hero->update($request->all());
-        } else {
-            Hero::create($request->all());
+        if ($request->hasFile('profile_photo')) {
+            $path = $request->file('profile_photo')->store('profile_photos', 'public');
+            $hero->profile_photo = $path;
         }
 
-        return back()->with('success','Hero updated!');
-    }
+        $hero->heading = $validated['heading'];
+        $hero->subheading = $validated['subheading'];
+        $hero->highlight = $validated['highlight'];
 
+        $hero->save();
+
+        return back()->with('success', 'Hero section updated!');
+    }
 
     public function updateAbout(Request $request)
     {
